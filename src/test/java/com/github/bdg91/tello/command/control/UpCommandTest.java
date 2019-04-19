@@ -37,31 +37,43 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LandCommandTest {
+public class UpCommandTest {
 
     @Mock
     private TelloClient telloClient;
 
-    private static final String COMMAND = "land";
+    private static final String COMMAND = "up";
+    private static final String SPACE = " ";
+    private static final int DISTANCE = 50;
 
-    private LandCommand landCommand;
+    private UpCommand upCommand;
 
     @Before
     public void setUp() {
-        landCommand = new LandCommand(telloClient);
+        upCommand = new UpCommand(telloClient, DISTANCE);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_distance_to_low() {
+        upCommand = new UpCommand(telloClient, 19);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_distance_to_high() {
+        upCommand = new UpCommand(telloClient, 501);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
-        when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
+        when(telloClient.sendCommand(COMMAND + SPACE + DISTANCE)).thenThrow(IOException.class);
 
-        landCommand.execute();
+        upCommand.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        landCommand.execute();
+        upCommand.execute();
 
-        verify(telloClient).sendCommand(COMMAND);
+        verify(telloClient).sendCommand(COMMAND + SPACE + DISTANCE);
     }
 }

@@ -25,43 +25,43 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+/**
+ * This command will make the drone fly up with a specified distance.
+ */
+public class UpCommand implements Command {
 
-@RunWith(MockitoJUnitRunner.class)
-public class LandCommandTest {
+    private static final String COMMAND = "up";
+    private static final String SPACE = " ";
 
-    @Mock
-    private TelloClient telloClient;
+    private final TelloClient telloClient;
+    private final int distanceInCm;
 
-    private static final String COMMAND = "land";
+    /**
+     * Creates a up command.
+     *
+     * @param telloClient the tello client
+     * @param distanceInCm the distance in cm, minimum 20, maximum 500
+     */
+    public UpCommand(final TelloClient telloClient, final int distanceInCm) {
+        if (distanceInCm < 20 | distanceInCm > 500) {
+            throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
+        }
 
-    private LandCommand landCommand;
-
-    @Before
-    public void setUp() {
-        landCommand = new LandCommand(telloClient);
+        this.telloClient = telloClient;
+        this.distanceInCm = distanceInCm;
     }
 
-    @Test(expected = IOException.class)
-    public void testExecute_io_exception() throws Exception {
-        when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
-
-        landCommand.execute();
-    }
-
-    @Test
-    public void testExecute() throws IOException {
-        landCommand.execute();
-
-        verify(telloClient).sendCommand(COMMAND);
+    /**
+     * Executes the up {@link Command}.
+     *
+     * @return 'ok' if everything is okay, 'error' otherwise
+     * @throws IOException if the sending the command or receiving the return value fails
+     */
+    public String execute() throws IOException {
+        return telloClient.sendCommand(COMMAND + SPACE + distanceInCm);
     }
 }
