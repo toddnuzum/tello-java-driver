@@ -49,10 +49,10 @@ public class TelloClient {
     public String sendCommand(final String message) throws IOException {
         final byte[] buffer = message.getBytes();
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-            datagramSocket.send(packet);
-            packet = new DatagramPacket(buffer, buffer.length);
-            datagramSocket.receive(packet);
-            return new String(packet.getData(), 0, packet.getLength());
+        datagramSocket.send(packet);
+        packet = new DatagramPacket(buffer, buffer.length);
+        datagramSocket.receive(packet);
+        return new String(packet.getData(), 0, packet.getLength());
     }
 
 }
