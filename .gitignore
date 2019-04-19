@@ -22,6 +22,10 @@ workspace.xml
 # gradle
 .gradle
 
+# Maven
+log/
+target/
+
 # local settings
 **/gradle.properties
 local.properties
