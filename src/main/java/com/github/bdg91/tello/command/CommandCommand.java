@@ -38,7 +38,7 @@ public class CommandCommand implements Command{
 
     private final TelloClient telloClient;
 
-    public CommandCommand(TelloClient telloClient) {
+    public CommandCommand(final TelloClient telloClient) {
         this.telloClient = telloClient;
     }
 
