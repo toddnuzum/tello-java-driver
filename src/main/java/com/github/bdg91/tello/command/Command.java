@@ -22,37 +22,12 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.client;
+package com.github.bdg91.tello.command;
 
 import java.io.IOException;
-import java.net.*;
 
-public class TelloClient {
+public interface Command {
 
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
-
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
-    }
-
-    /**
-     * Sends a command to the initialized {@link DatagramSocket}.
-     *
-     * @param message the message to send
-     * @return the response from the socket
-     * @throws IOException if the sending or receiving of the command fails
-     */
-    public String sendCommand(final String message) throws IOException {
-        final byte[] buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-            datagramSocket.send(packet);
-            packet = new DatagramPacket(buffer, buffer.length);
-            datagramSocket.receive(packet);
-            return new String(packet.getData(), 0, packet.getLength());
-    }
+    String execute() throws IOException;
 
 }
