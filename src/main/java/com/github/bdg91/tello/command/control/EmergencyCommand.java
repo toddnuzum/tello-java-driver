@@ -47,7 +47,7 @@ public class EmergencyCommand implements Command {
      * Executes the emergency {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if the sending the command or receiving the return value fails
+     * @throws IOException if sending the command or receiving the return value fails
      */
     public String execute() throws IOException {
         return telloClient.sendCommand(COMMAND);
