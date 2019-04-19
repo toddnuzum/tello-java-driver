@@ -30,23 +30,23 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone fly up with a specified distance.
+ * This command will make the drone fly down with a specified distance.
  */
-public class UpCommand implements Command {
+public class DownCommand implements Command {
 
-    private static final String COMMAND = "up";
+    private static final String COMMAND = "down";
     private static final String SPACE = " ";
 
     private final TelloClient telloClient;
     private final int distanceInCm;
 
     /**
-     * Creates a up command.
+     * Creates a down command.
      *
      * @param telloClient  the tello client
      * @param distanceInCm the distance in cm, minimum 20, maximum 500
      */
-    public UpCommand(final TelloClient telloClient, final int distanceInCm) {
+    public DownCommand(final TelloClient telloClient, final int distanceInCm) {
         if (distanceInCm < 20 | distanceInCm > 500) {
             throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
         }
@@ -56,7 +56,7 @@ public class UpCommand implements Command {
     }
 
     /**
-     * Executes the up {@link Command}.
+     * Executes the down {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
      * @throws IOException if the sending the command or receiving the return value fails

@@ -25,43 +25,55 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
-import com.github.bdg91.tello.command.Command;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 
-/**
- * This command will make the drone fly up with a specified distance.
- */
-public class UpCommand implements Command {
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-    private static final String COMMAND = "up";
+@RunWith(MockitoJUnitRunner.class)
+public class DownCommandTest {
+
+    @Mock
+    private TelloClient telloClient;
+
+    private static final String COMMAND = "down";
     private static final String SPACE = " ";
+    private static final int DISTANCE = 50;
 
-    private final TelloClient telloClient;
-    private final int distanceInCm;
+    private DownCommand downCommand;
 
-    /**
-     * Creates a up command.
-     *
-     * @param telloClient  the tello client
-     * @param distanceInCm the distance in cm, minimum 20, maximum 500
-     */
-    public UpCommand(final TelloClient telloClient, final int distanceInCm) {
-        if (distanceInCm < 20 | distanceInCm > 500) {
-            throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
-        }
-
-        this.telloClient = telloClient;
-        this.distanceInCm = distanceInCm;
+    @Before
+    public void setUp() {
+        downCommand = new DownCommand(telloClient, DISTANCE);
     }
 
-    /**
-     * Executes the up {@link Command}.
-     *
-     * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if the sending the command or receiving the return value fails
-     */
-    public String execute() throws IOException {
-        return telloClient.sendCommand(COMMAND + SPACE + distanceInCm);
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_distance_to_low() {
+        downCommand = new DownCommand(telloClient, 19);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_distance_to_high() {
+        downCommand = new DownCommand(telloClient, 501);
+    }
+
+    @Test(expected = IOException.class)
+    public void testExecute_io_exception() throws Exception {
+        when(telloClient.sendCommand(COMMAND + SPACE + DISTANCE)).thenThrow(IOException.class);
+
+        downCommand.execute();
+    }
+
+    @Test
+    public void testExecute() throws IOException {
+        downCommand.execute();
+
+        verify(telloClient).sendCommand(COMMAND + SPACE + DISTANCE);
     }
 }
