@@ -22,27 +22,28 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
 
 /**
- * This command will disable the video stream.
+ * This command will make the drone land automatically.
  */
-public class StreamOffCommand implements Command {
+public class LandCommand implements Command {
 
-    private static final String COMMAND = "streamoff";
+    private static final String COMMAND = "land";
 
     private final TelloClient telloClient;
 
-    public StreamOffCommand(final TelloClient telloClient) {
+    public LandCommand(final TelloClient telloClient) {
         this.telloClient = telloClient;
     }
 
     /**
-     * Executes the streamoff {@link Command}.
+     * Executes the land {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
      * @throws IOException if the sending the command or receiving the return value fails

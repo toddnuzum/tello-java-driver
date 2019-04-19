@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.control.EmergencyCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,30 +38,30 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TakeOffCommandTest {
+public class EmergencyCommandTest {
 
     @Mock
     private TelloClient telloClient;
 
-    private static final String COMMAND = "takeoff";
+    private static final String COMMAND = "emergency";
 
-    private TakeOffCommand takeOffCommand;
+    private EmergencyCommand emergencyCommand;
 
     @Before
     public void setUp() {
-        takeOffCommand = new TakeOffCommand(telloClient);
+        emergencyCommand = new EmergencyCommand(telloClient);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
 
-        takeOffCommand.execute();
+        emergencyCommand.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        takeOffCommand.execute();
+        emergencyCommand.execute();
 
         verify(telloClient).sendCommand(COMMAND);
     }

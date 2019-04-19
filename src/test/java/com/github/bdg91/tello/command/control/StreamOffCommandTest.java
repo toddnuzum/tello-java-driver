@@ -22,33 +22,47 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.control.StreamOffCommand;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 
-/**
- * This command will make the drone enter the SDK mode. This command has to be executed before executing any of the other
- * commands.
- */
-public class CommandCommand implements Command{
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-    private static final String COMMAND = "command";
+@RunWith(MockitoJUnitRunner.class)
+public class StreamOffCommandTest {
 
-    private final TelloClient telloClient;
+    @Mock
+    private TelloClient telloClient;
 
-    public CommandCommand(final TelloClient telloClient) {
-        this.telloClient = telloClient;
+    private static final String COMMAND = "streamoff";
+
+    private StreamOffCommand streamOffCommand;
+
+    @Before
+    public void setUp() {
+        streamOffCommand = new StreamOffCommand(telloClient);
     }
 
-    /**
-     * Executes the command {@link Command}.
-     *
-     * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if the sending the command or receiving the return value fails
-     */
-    public String execute() throws IOException {
-        return telloClient.sendCommand(COMMAND);
+    @Test(expected = IOException.class)
+    public void testExecute_io_exception() throws Exception {
+        when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
+
+        streamOffCommand.execute();
+    }
+
+    @Test
+    public void testExecute() throws IOException {
+        streamOffCommand.execute();
+
+        verify(telloClient).sendCommand(COMMAND);
     }
 }

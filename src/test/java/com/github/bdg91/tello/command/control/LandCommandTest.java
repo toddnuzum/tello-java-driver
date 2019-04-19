@@ -22,32 +22,47 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.control.LandCommand;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 
-/**
- * This command will enable the video stream.
- */
-public class StreamOnCommand implements Command {
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-    private static final String COMMAND = "streamon";
+@RunWith(MockitoJUnitRunner.class)
+public class LandCommandTest {
 
-    private final TelloClient telloClient;
+    @Mock
+    private TelloClient telloClient;
 
-    public StreamOnCommand(final TelloClient telloClient) {
-        this.telloClient = telloClient;
+    private static final String COMMAND = "land";
+
+    private LandCommand landCommand;
+
+    @Before
+    public void setUp() {
+        landCommand = new LandCommand(telloClient);
     }
 
-    /**
-     * Executes the streamon {@link Command}.
-     *
-     * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if the sending the command or receiving the return value fails
-     */
-    public String execute() throws IOException {
-        return telloClient.sendCommand(COMMAND);
+    @Test(expected = IOException.class)
+    public void testExecute_io_exception() throws Exception {
+        when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
+
+        landCommand.execute();
+    }
+
+    @Test
+    public void testExecute() throws IOException {
+        landCommand.execute();
+
+        verify(telloClient).sendCommand(COMMAND);
     }
 }

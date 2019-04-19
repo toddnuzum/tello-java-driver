@@ -22,27 +22,29 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
+
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
 
 /**
- * This command will make the drone land automatically.
+ * This command will stop all the motors immediately.
  */
-public class LandCommand implements Command {
+public class EmergencyCommand implements Command {
 
-    private static final String COMMAND = "land";
+    private static final String COMMAND = "emergency";
 
     private final TelloClient telloClient;
 
-    public LandCommand(final TelloClient telloClient) {
+    public EmergencyCommand(final TelloClient telloClient) {
         this.telloClient = telloClient;
     }
 
     /**
-     * Executes the land {@link Command}.
+     * Executes the emergency {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
      * @throws IOException if the sending the command or receiving the return value fails

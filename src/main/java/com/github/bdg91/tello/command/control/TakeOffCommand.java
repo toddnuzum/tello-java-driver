@@ -22,46 +22,33 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+/**
+ * This command will make the drone take off automatically.
+ */
+public class TakeOffCommand implements Command {
 
-@RunWith(MockitoJUnitRunner.class)
-public class CommandCommandTest {
+    private static final String COMMAND = "takeoff";
 
-    @Mock
-    private TelloClient telloClient;
+    private final TelloClient telloClient;
 
-    private static final String COMMAND = "command";
-
-    private CommandCommand commandCommand;
-
-    @Before
-    public void setUp() {
-        commandCommand = new CommandCommand(telloClient);
+    public TakeOffCommand(final TelloClient telloClient) {
+        this.telloClient = telloClient;
     }
 
-    @Test(expected = IOException.class)
-    public void testExecute_io_exception() throws Exception {
-        when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
-
-        commandCommand.execute();
-    }
-
-    @Test
-    public void testExecute() throws IOException {
-        commandCommand.execute();
-
-        verify(telloClient).sendCommand(COMMAND);
+    /**
+     * Executes the takeoff {@link Command}.
+     *
+     * @return 'ok' if everything is okay, 'error' otherwise
+     * @throws IOException if the sending the command or receiving the return value fails
+     */
+    public String execute() throws IOException {
+        return telloClient.sendCommand(COMMAND);
     }
 }

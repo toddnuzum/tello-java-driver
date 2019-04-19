@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.control.CommandCommand;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,30 +38,30 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class StreamOffCommandTest {
+public class CommandCommandTest {
 
     @Mock
     private TelloClient telloClient;
 
-    private static final String COMMAND = "streamoff";
+    private static final String COMMAND = "command";
 
-    private StreamOffCommand streamOffCommand;
+    private CommandCommand commandCommand;
 
     @Before
     public void setUp() {
-        streamOffCommand = new StreamOffCommand(telloClient);
+        commandCommand = new CommandCommand(telloClient);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
 
-        streamOffCommand.execute();
+        commandCommand.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        streamOffCommand.execute();
+        commandCommand.execute();
 
         verify(telloClient).sendCommand(COMMAND);
     }
