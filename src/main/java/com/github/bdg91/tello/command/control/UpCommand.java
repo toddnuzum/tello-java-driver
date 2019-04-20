@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone fly up with a specified distance.
+ * Command to make the drone ascend by a specified distance.
  */
 public class UpCommand implements Command {
 

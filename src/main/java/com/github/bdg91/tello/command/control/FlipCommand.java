@@ -31,7 +31,7 @@ import com.github.bdg91.tello.command.model.FlipDirection;
 import java.io.IOException;
 
 /**
- * This command will make the drone flip in the specified direction.
+ * Command to make the drone flip in a specified direction.
  */
 public class FlipCommand implements Command {
 

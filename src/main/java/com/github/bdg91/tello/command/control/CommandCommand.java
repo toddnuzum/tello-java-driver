@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone enter the SDK mode. This command has to be executed before executing any of the other
+ * Command to make the drone enter SDK mode. This command has to be executed before executing any of the other
  * commands.
  */
 public class CommandCommand implements Command {

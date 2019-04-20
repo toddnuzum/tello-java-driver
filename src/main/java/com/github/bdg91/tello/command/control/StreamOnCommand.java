@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will enable the video stream.
+ * Command to enable the video stream.
  */
 public class StreamOnCommand implements Command {
 

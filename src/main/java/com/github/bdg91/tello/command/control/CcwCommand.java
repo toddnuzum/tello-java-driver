@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone rotate in a counter-clockwise direction with a specified amount of degrees.
+ * Command to make the drone rotate in a counter-clockwise direction by a specified amount of degrees.
  */
 public class CcwCommand implements Command {
 
@@ -41,7 +41,7 @@ public class CcwCommand implements Command {
     private final int degrees;
 
     /**
-     * Creates a cw command.
+     * Creates a ccw command.
      *
      * @param telloClient  the tello client
      * @param degrees      the amount of degrees, minimum 1, maximum 3600

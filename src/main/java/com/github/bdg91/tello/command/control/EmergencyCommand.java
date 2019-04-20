@@ -31,7 +31,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will stop all the motors immediately.
+ * Command to stop all the motors immediately.
  */
 public class EmergencyCommand implements Command {
 

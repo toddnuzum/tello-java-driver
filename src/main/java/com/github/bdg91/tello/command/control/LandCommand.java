@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone land automatically.
+ * Command to land the drone automatically.
  */
 public class LandCommand implements Command {
 

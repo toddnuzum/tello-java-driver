@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone take off automatically.
+ * Command to take off automatically.
  */
 public class TakeOffCommand implements Command {
 

@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will disable the video stream.
+ * Command to disable the video stream.
  */
 public class StreamOffCommand implements Command {
 

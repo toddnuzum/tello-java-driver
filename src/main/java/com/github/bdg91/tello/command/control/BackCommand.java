@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone fly backward with a specified distance.
+ * Command to make the drone fly backwards by a specified distance.
  */
 public class BackCommand implements Command {
 

@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone rotate in a clockwise direction with a specified amount of degrees.
+ * Command to make the drone rotate in a clockwise direction by a specified amount of degrees.
  */
 public class CwCommand implements Command {
 
