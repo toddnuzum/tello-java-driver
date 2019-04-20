@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * Command to make the drone descend by a specified assertDistance.
+ * Command to make the drone descend by a specified distance.
  */
 public class DownCommand implements Command {
 
@@ -44,7 +44,7 @@ public class DownCommand implements Command {
      * Creates a down command.
      *
      * @param telloClient  the tello client
-     * @param distanceInCm the assertDistance in cm, minimum 20, maximum 500
+     * @param distanceInCm the distance in cm, minimum 20, maximum 500
      */
     public DownCommand(final TelloClient telloClient, final int distanceInCm) {
         if (distanceInCm < 20 | distanceInCm > 500) {

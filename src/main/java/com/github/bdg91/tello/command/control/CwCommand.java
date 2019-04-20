@@ -31,7 +31,7 @@ import com.github.bdg91.tello.util.Assert;
 import java.io.IOException;
 
 /**
- * Command to make the drone rotate in a clockwise direction by a specified amount of assertDegrees.
+ * Command to make the drone rotate in a clockwise direction by a specified amount of degrees.
  */
 public class CwCommand implements Command {
 
@@ -45,7 +45,7 @@ public class CwCommand implements Command {
      * Creates a cw command.
      *
      * @param telloClient  the tello client
-     * @param degrees      the amount of assertDegrees, minimum 1, maximum 3600
+     * @param degrees      the amount of degrees, minimum 1, maximum 3600
      */
     public CwCommand(final TelloClient telloClient, final int degrees) {
         Assert.assertDegrees(degrees);
