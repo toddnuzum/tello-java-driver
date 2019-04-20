@@ -25,6 +25,7 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,23 +45,23 @@ public class StreamOffCommandTest {
 
     private static final String COMMAND = "streamoff";
 
-    private StreamOffCommand streamOffCommand;
+    private Command command;
 
     @Before
     public void setUp() {
-        streamOffCommand = new StreamOffCommand(telloClient);
+        command = new StreamOffCommand(telloClient);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
 
-        streamOffCommand.execute();
+        command.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        streamOffCommand.execute();
+        command.execute();
 
         verify(telloClient).sendCommand(COMMAND);
     }

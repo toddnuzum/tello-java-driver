@@ -25,6 +25,7 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,23 +45,23 @@ public class CommandCommandTest {
 
     private static final String COMMAND = "command";
 
-    private CommandCommand commandCommand;
+    private Command command;
 
     @Before
     public void setUp() {
-        commandCommand = new CommandCommand(telloClient);
+        command = new CommandCommand(telloClient);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);
 
-        commandCommand.execute();
+        command.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        commandCommand.execute();
+        command.execute();
 
         verify(telloClient).sendCommand(COMMAND);
     }

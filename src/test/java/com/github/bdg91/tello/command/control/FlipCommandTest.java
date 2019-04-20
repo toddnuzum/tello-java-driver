@@ -25,6 +25,7 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 import com.github.bdg91.tello.command.model.FlipDirection;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class FlipCommandTest {
     private static final String SPACE = " ";
     private static final String FLIP_DIRECTION_LABEL = "b";
 
-    private FlipCommand command;
+    private Command command;
 
     @Before
     public void setUp() {

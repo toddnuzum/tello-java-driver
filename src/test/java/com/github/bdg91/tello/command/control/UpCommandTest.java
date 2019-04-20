@@ -25,6 +25,7 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,33 +47,33 @@ public class UpCommandTest {
     private static final String SPACE = " ";
     private static final int DISTANCE = 50;
 
-    private UpCommand upCommand;
+    private Command command;
 
     @Before
     public void setUp() {
-        upCommand = new UpCommand(telloClient, DISTANCE);
+        command = new UpCommand(telloClient, DISTANCE);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructor_distance_to_low() {
-        upCommand = new UpCommand(telloClient, 19);
+        command = new UpCommand(telloClient, 19);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructor_distance_to_high() {
-        upCommand = new UpCommand(telloClient, 501);
+        command = new UpCommand(telloClient, 501);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND + SPACE + DISTANCE)).thenThrow(IOException.class);
 
-        upCommand.execute();
+        command.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        upCommand.execute();
+        command.execute();
 
         verify(telloClient).sendCommand(COMMAND + SPACE + DISTANCE);
     }

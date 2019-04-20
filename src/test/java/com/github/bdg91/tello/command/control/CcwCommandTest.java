@@ -25,6 +25,7 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,7 @@ public class CcwCommandTest {
     private static final String SPACE = " ";
     private static final int DEGREES = 360;
 
-    private CcwCommand command;
+    private Command command;
 
     @Before
     public void setUp() {

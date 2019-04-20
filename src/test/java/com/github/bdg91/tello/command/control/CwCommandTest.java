@@ -25,6 +25,7 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,33 +47,33 @@ public class CwCommandTest {
     private static final String SPACE = " ";
     private static final int DEGREES = 360;
 
-    private CwCommand cwCommand;
+    private Command command;
 
     @Before
     public void setUp() {
-        cwCommand = new CwCommand(telloClient, DEGREES);
+        command = new CwCommand(telloClient, DEGREES);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructor_degrees_to_low() {
-        cwCommand = new CwCommand(telloClient, 0);
+        command = new CwCommand(telloClient, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testConstructor_degrees_to_high() {
-        cwCommand = new CwCommand(telloClient, 3601);
+        command = new CwCommand(telloClient, 3601);
     }
 
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND + SPACE + DEGREES)).thenThrow(IOException.class);
 
-        cwCommand.execute();
+        command.execute();
     }
 
     @Test
     public void testExecute() throws IOException {
-        cwCommand.execute();
+        command.execute();
 
         verify(telloClient).sendCommand(COMMAND + SPACE + DEGREES);
     }
