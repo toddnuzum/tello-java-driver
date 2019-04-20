@@ -25,43 +25,55 @@
 package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
-import com.github.bdg91.tello.command.Command;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.IOException;
 
-/**
- * This command will make the drone rotate in a clockwise direction with a specified amount of degrees.
- */
-public class CwCommand implements Command {
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-    private static final String COMMAND = "cw";
+@RunWith(MockitoJUnitRunner.class)
+public class CcwCommandTest {
+
+    @Mock
+    private TelloClient telloClient;
+
+    private static final String COMMAND = "ccw";
     private static final String SPACE = " ";
+    private static final int DEGREES = 360;
 
-    private final TelloClient telloClient;
-    private final int degrees;
+    private CcwCommand command;
 
-    /**
-     * Creates a cw command.
-     *
-     * @param telloClient  the tello client
-     * @param degrees      the amount of degrees, minimum 1, maximum 3600
-     */
-    public CwCommand(final TelloClient telloClient, final int degrees) {
-        if (degrees < 1 | degrees > 3600) {
-            throw new IllegalArgumentException("The minimum amount of degrees is 1, the maximum amount of degrees is 3600.");
-        }
-
-        this.telloClient = telloClient;
-        this.degrees = degrees;
+    @Before
+    public void setUp() {
+        command = new CcwCommand(telloClient, DEGREES);
     }
 
-    /**
-     * Executes the cw {@link Command}.
-     *
-     * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if sending the command or receiving the return value fails
-     */
-    public String execute() throws IOException {
-        return telloClient.sendCommand(COMMAND + SPACE + degrees);
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_degrees_to_low() {
+        command = new CcwCommand(telloClient, 0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructor_degrees_to_high() {
+        command = new CcwCommand(telloClient, 3601);
+    }
+
+    @Test(expected = IOException.class)
+    public void testExecute_io_exception() throws Exception {
+        when(telloClient.sendCommand(COMMAND + SPACE + DEGREES)).thenThrow(IOException.class);
+
+        command.execute();
+    }
+
+    @Test
+    public void testExecute() throws IOException {
+        command.execute();
+
+        verify(telloClient).sendCommand(COMMAND + SPACE + DEGREES);
     }
 }

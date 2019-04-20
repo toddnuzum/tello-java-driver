@@ -30,11 +30,11 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * This command will make the drone rotate in a clockwise direction with a specified amount of degrees.
+ * This command will make the drone rotate in a counter-clockwise direction with a specified amount of degrees.
  */
-public class CwCommand implements Command {
+public class CcwCommand implements Command {
 
-    private static final String COMMAND = "cw";
+    private static final String COMMAND = "ccw";
     private static final String SPACE = " ";
 
     private final TelloClient telloClient;
@@ -46,7 +46,7 @@ public class CwCommand implements Command {
      * @param telloClient  the tello client
      * @param degrees      the amount of degrees, minimum 1, maximum 3600
      */
-    public CwCommand(final TelloClient telloClient, final int degrees) {
+    public CcwCommand(final TelloClient telloClient, final int degrees) {
         if (degrees < 1 | degrees > 3600) {
             throw new IllegalArgumentException("The minimum amount of degrees is 1, the maximum amount of degrees is 3600.");
         }
@@ -56,7 +56,7 @@ public class CwCommand implements Command {
     }
 
     /**
-     * Executes the cw {@link Command}.
+     * Executes the ccw {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
      * @throws IOException if sending the command or receiving the return value fails
