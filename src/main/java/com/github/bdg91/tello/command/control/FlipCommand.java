@@ -45,7 +45,7 @@ public class FlipCommand implements Command {
      * Creates a flip command.
      *
      * @param telloClient  the tello client
-     * @param direction    the direction
+     * @param direction    the flip direction
      */
     public FlipCommand(final TelloClient telloClient, final FlipDirection direction) {
         this.telloClient = telloClient;

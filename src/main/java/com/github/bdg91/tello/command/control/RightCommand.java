@@ -31,7 +31,7 @@ import com.github.bdg91.tello.util.Assert;
 import java.io.IOException;
 
 /**
- * Command to make the drone fly right by a specified assertDistance.
+ * Command to make the drone fly right by a specified distance.
  */
 public class RightCommand implements Command {
 
@@ -45,7 +45,7 @@ public class RightCommand implements Command {
      * Creates a right command.
      *
      * @param telloClient  the tello client
-     * @param distanceInCm the assertDistance in cm, minimum 20, maximum 500
+     * @param distanceInCm the distance in cm, minimum 20, maximum 500
      */
     public RightCommand(final TelloClient telloClient, final int distanceInCm) {
         Assert.assertDistance(distanceInCm);
