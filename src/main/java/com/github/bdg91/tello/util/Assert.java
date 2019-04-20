@@ -55,7 +55,7 @@ public class Assert {
      */
     public static void assertSpeed(final int speed) {
         if (speed < 10 | speed > 100) {
-            throw new IllegalArgumentException("The minimum speed is 1, the maximum speed is 3600.");
+            throw new IllegalArgumentException("The minimum speed is 1, the maximum speed is 100.");
         }
     }
 
