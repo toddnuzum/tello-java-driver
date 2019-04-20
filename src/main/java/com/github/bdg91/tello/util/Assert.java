@@ -22,46 +22,19 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command.control;
+package com.github.bdg91.tello.util;
 
-import com.github.bdg91.tello.client.TelloClient;
-import com.github.bdg91.tello.command.Command;
+public class Assert {
 
-import java.io.IOException;
-
-/**
- * Command to make the drone descend by a specified validDistance.
- */
-public class DownCommand implements Command {
-
-    private static final String COMMAND = "down";
-    private static final String SPACE = " ";
-
-    private final TelloClient telloClient;
-    private final int distanceInCm;
-
-    /**
-     * Creates a down command.
-     *
-     * @param telloClient  the tello client
-     * @param distanceInCm the validDistance in cm, minimum 20, maximum 500
-     */
-    public DownCommand(final TelloClient telloClient, final int distanceInCm) {
+    public static void validDistance(final int distanceInCm) {
         if (distanceInCm < 20 | distanceInCm > 500) {
             throw new IllegalArgumentException("The minimum allowed validDistance is 20, the maximum allowed validDistance is 500.");
         }
-
-        this.telloClient = telloClient;
-        this.distanceInCm = distanceInCm;
     }
 
-    /**
-     * Executes the down {@link Command}.
-     *
-     * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if sending the command or receiving the return value fails
-     */
-    public String execute() throws IOException {
-        return telloClient.sendCommand(COMMAND + SPACE + distanceInCm);
+    public static void validDegrees(final int degrees) {
+        if (degrees < 1 | degrees > 3600) {
+            throw new IllegalArgumentException("The minimum amount of validDegrees is 1, the maximum amount of validDegrees is 3600.");
+        }
     }
 }

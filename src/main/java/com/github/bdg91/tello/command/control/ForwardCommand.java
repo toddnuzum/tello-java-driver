@@ -26,11 +26,12 @@ package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
 import com.github.bdg91.tello.command.Command;
+import com.github.bdg91.tello.util.Assert;
 
 import java.io.IOException;
 
 /**
- * Command to make the drone fly forward by a specified distance.
+ * Command to make the drone fly forward by a specified validDistance.
  */
 public class ForwardCommand implements Command {
 
@@ -44,13 +45,10 @@ public class ForwardCommand implements Command {
      * Creates a forward command.
      *
      * @param telloClient  the tello client
-     * @param distanceInCm the distance in cm, minimum 20, maximum 500
+     * @param distanceInCm the validDistance in cm, minimum 20, maximum 500
      */
     public ForwardCommand(final TelloClient telloClient, final int distanceInCm) {
-        if (distanceInCm < 20 | distanceInCm > 500) {
-            throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
-        }
-
+        Assert.validDistance(distanceInCm);
         this.telloClient = telloClient;
         this.distanceInCm = distanceInCm;
     }

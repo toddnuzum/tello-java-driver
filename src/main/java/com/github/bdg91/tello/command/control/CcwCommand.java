@@ -26,11 +26,12 @@ package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
 import com.github.bdg91.tello.command.Command;
+import com.github.bdg91.tello.util.Assert;
 
 import java.io.IOException;
 
 /**
- * Command to make the drone rotate in a counter-clockwise direction by a specified amount of degrees.
+ * Command to make the drone rotate in a counter-clockwise direction by a specified amount of validDegrees.
  */
 public class CcwCommand implements Command {
 
@@ -44,13 +45,10 @@ public class CcwCommand implements Command {
      * Creates a ccw command.
      *
      * @param telloClient  the tello client
-     * @param degrees      the amount of degrees, minimum 1, maximum 3600
+     * @param degrees      the amount of validDegrees, minimum 1, maximum 3600
      */
     public CcwCommand(final TelloClient telloClient, final int degrees) {
-        if (degrees < 1 | degrees > 3600) {
-            throw new IllegalArgumentException("The minimum amount of degrees is 1, the maximum amount of degrees is 3600.");
-        }
-
+        Assert.validDegrees(degrees);
         this.telloClient = telloClient;
         this.degrees = degrees;
     }
