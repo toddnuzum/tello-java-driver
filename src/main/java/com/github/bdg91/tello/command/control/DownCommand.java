@@ -30,7 +30,7 @@ import com.github.bdg91.tello.command.Command;
 import java.io.IOException;
 
 /**
- * Command to make the drone descend by a specified validDistance.
+ * Command to make the drone descend by a specified assertDistance.
  */
 public class DownCommand implements Command {
 
@@ -44,11 +44,11 @@ public class DownCommand implements Command {
      * Creates a down command.
      *
      * @param telloClient  the tello client
-     * @param distanceInCm the validDistance in cm, minimum 20, maximum 500
+     * @param distanceInCm the assertDistance in cm, minimum 20, maximum 500
      */
     public DownCommand(final TelloClient telloClient, final int distanceInCm) {
         if (distanceInCm < 20 | distanceInCm > 500) {
-            throw new IllegalArgumentException("The minimum allowed validDistance is 20, the maximum allowed validDistance is 500.");
+            throw new IllegalArgumentException("The minimum allowed assertDistance is 20, the maximum allowed assertDistance is 500.");
         }
 
         this.telloClient = telloClient;

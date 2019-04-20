@@ -31,35 +31,48 @@ import com.github.bdg91.tello.util.Assert;
 import java.io.IOException;
 
 /**
- * Command to make the drone rotate in a counter-clockwise direction by a specified amount of assertDegrees.
+ * Command to make the drone fly to position x, y, z by a specified speed.
  */
-public class CcwCommand implements Command {
+public class GoCommand implements Command {
 
-    private static final String COMMAND = "ccw";
+    private static final String COMMAND = "go";
     private static final String SPACE = " ";
 
     private final TelloClient telloClient;
-    private final int degrees;
+    private final int positionX;
+    private final int positionY;
+    private final int positionZ;
+    private final int speed;
 
     /**
-     * Creates a ccw command.
+     * Creates a go command
      *
-     * @param telloClient  the tello client
-     * @param degrees      the amount of assertDegrees, minimum 1, maximum 3600
+     * @param telloClient the tello client
+     * @param positionX   the x position, minimum 20, maximum 500
+     * @param positionY   the y position, minimum 20, maximum 500
+     * @param positionZ   the z position, minimum 20, maximum 500
+     * @param speed       the speed, minimum 10, maximum 100
      */
-    public CcwCommand(final TelloClient telloClient, final int degrees) {
-        Assert.assertDegrees(degrees);
+    public GoCommand(TelloClient telloClient, int positionX, int positionY, int positionZ, int speed) {
+        Assert.assertDistance(positionX);
+        Assert.assertDistance(positionY);
+        Assert.assertDistance(positionZ);
+        Assert.assertSpeed(speed);
+
         this.telloClient = telloClient;
-        this.degrees = degrees;
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.positionZ = positionZ;
+        this.speed = speed;
     }
 
     /**
-     * Executes the ccw {@link Command}.
+     * Executes the go {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
      * @throws IOException if sending the command or receiving the return value fails
      */
     public String execute() throws IOException {
-        return telloClient.sendCommand(COMMAND + SPACE + degrees);
+        return telloClient.sendCommand(COMMAND + SPACE + positionX + SPACE + positionY + SPACE + positionZ + SPACE + speed);
     }
 }
