@@ -48,7 +48,7 @@ public class BackCommand implements Command {
      * @param distanceInCm the distance in cm, minimum 20, maximum 500
      */
     public BackCommand(final TelloClient telloClient, final int distanceInCm) {
-        Assert.assertDistance(distanceInCm);
+        Assert.distance(distanceInCm);
         this.telloClient = telloClient;
         this.distanceInCm = distanceInCm;
     }

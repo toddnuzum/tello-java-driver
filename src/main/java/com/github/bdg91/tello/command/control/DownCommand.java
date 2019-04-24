@@ -48,7 +48,7 @@ public class DownCommand implements Command {
      */
     public DownCommand(final TelloClient telloClient, final int distanceInCm) {
         if (distanceInCm < 20 | distanceInCm > 500) {
-            throw new IllegalArgumentException("The minimum allowed assertDistance is 20, the maximum allowed assertDistance is 500.");
+            throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
         }
 
         this.telloClient = telloClient;

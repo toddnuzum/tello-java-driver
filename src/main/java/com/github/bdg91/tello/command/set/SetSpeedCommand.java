@@ -48,7 +48,7 @@ public class SetSpeedCommand implements Command {
      * @param speed        the speed in cm/s, minimum 10, maximum 100
      */
     public SetSpeedCommand(final TelloClient telloClient, final int speed) {
-        Assert.assertSpeed(speed);
+        Assert.speed(speed);
         this.telloClient = telloClient;
         this.speed = speed;
     }

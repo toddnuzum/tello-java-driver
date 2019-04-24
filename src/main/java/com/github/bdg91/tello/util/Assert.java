@@ -25,13 +25,13 @@
 package com.github.bdg91.tello.util;
 
 public class Assert {
-
+    
     /**
      * Checks if the specified distance is valid.
      *
      * @param distanceInCm the distance in cm
      */
-    public static void assertDistance(final int distanceInCm) {
+    public static void distance(final int distanceInCm) {
         if (distanceInCm < 20 | distanceInCm > 500) {
             throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
         }
@@ -42,7 +42,7 @@ public class Assert {
      *
      * @param degrees the amount of degrees
      */
-    public static void assertDegrees(final int degrees) {
+    public static void degrees(final int degrees) {
         if (degrees < 1 | degrees > 3600) {
             throw new IllegalArgumentException("The minimum amount of degrees is 1, the maximum amount of degrees is 3600.");
         }
@@ -53,7 +53,7 @@ public class Assert {
      *
      * @param speed the speed in cm/s
      */
-    public static void assertSpeed(final int speed) {
+    public static void speed(final int speed) {
         if (speed < 10 | speed > 100) {
             throw new IllegalArgumentException("The minimum speed is 1, the maximum speed is 100.");
         }

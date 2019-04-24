@@ -48,7 +48,7 @@ public class CwCommand implements Command {
      * @param degrees      the amount of degrees, minimum 1, maximum 3600
      */
     public CwCommand(final TelloClient telloClient, final int degrees) {
-        Assert.assertDegrees(degrees);
+        Assert.degrees(degrees);
         this.telloClient = telloClient;
         this.degrees = degrees;
     }

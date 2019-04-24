@@ -54,10 +54,10 @@ public class GoCommand implements Command {
      * @param speed       the speed, minimum 10, maximum 100
      */
     public GoCommand(TelloClient telloClient, int positionX, int positionY, int positionZ, int speed) {
-        Assert.assertDistance(positionX);
-        Assert.assertDistance(positionY);
-        Assert.assertDistance(positionZ);
-        Assert.assertSpeed(speed);
+        Assert.distance(positionX);
+        Assert.distance(positionY);
+        Assert.distance(positionZ);
+        Assert.speed(speed);
 
         this.telloClient = telloClient;
         this.positionX = positionX;
