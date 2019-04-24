@@ -25,7 +25,11 @@
 package com.github.bdg91.tello.util;
 
 public class Assert {
-    
+
+    private Assert() {
+        // Hide constructor
+    }
+
     /**
      * Checks if the specified distance is valid.
      *
