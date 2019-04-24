@@ -22,37 +22,34 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.client;
+package com.github.bdg91.tello.command.control;
+
+
+import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
-import java.net.*;
 
-public class TelloClient {
+/**
+ * Command to stop all the motors immediately.
+ */
+public class EmergencyCommand implements Command {
 
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
+    private static final String COMMAND = "emergency";
 
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
+    private final TelloClient telloClient;
+
+    public EmergencyCommand(final TelloClient telloClient) {
+        this.telloClient = telloClient;
     }
 
     /**
-     * Sends a command to the initialized {@link DatagramSocket}.
+     * Executes the emergency {@link Command}.
      *
-     * @param message the message to send
-     * @return the response from the socket
-     * @throws IOException if the sending or receiving of the command fails
+     * @return 'ok' if everything is okay, 'error' otherwise
+     * @throws IOException if sending the command or receiving the return value fails
      */
-    public String sendCommand(final String message) throws IOException {
-        final byte[] buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-        datagramSocket.send(packet);
-        packet = new DatagramPacket(buffer, buffer.length);
-        datagramSocket.receive(packet);
-        return new String(packet.getData(), 0, packet.getLength());
+    public String execute() throws IOException {
+        return telloClient.sendCommand(COMMAND);
     }
-
 }

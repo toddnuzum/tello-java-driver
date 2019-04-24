@@ -22,23 +22,24 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.command;
+package com.github.bdg91.tello.command.control;
 
 import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
 
 /**
- * This command will make the drone enter the SDK mode. This command has to be executed before executing any of the other
+ * Command to make the drone enter SDK mode. This command has to be executed before executing any of the other
  * commands.
  */
-public class CommandCommand implements Command{
+public class CommandCommand implements Command {
 
     private static final String COMMAND = "command";
 
     private final TelloClient telloClient;
 
-    public CommandCommand(TelloClient telloClient) {
+    public CommandCommand(final TelloClient telloClient) {
         this.telloClient = telloClient;
     }
 
@@ -46,7 +47,7 @@ public class CommandCommand implements Command{
      * Executes the command {@link Command}.
      *
      * @return 'ok' if everything is okay, 'error' otherwise
-     * @throws IOException if the sending the command or receiving the return value fails
+     * @throws IOException if sending the command or receiving the return value fails
      */
     public String execute() throws IOException {
         return telloClient.sendCommand(COMMAND);

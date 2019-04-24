@@ -22,37 +22,44 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.client;
+package com.github.bdg91.tello.command.set;
+
+import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
+import com.github.bdg91.tello.util.Assert;
 
 import java.io.IOException;
-import java.net.*;
 
-public class TelloClient {
+/**
+ * Command to set the speed.
+ */
+public class SetSpeedCommand implements Command {
 
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
+    private static final String COMMAND = "speed";
+    private static final String SPACE = " ";
 
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
+    private final TelloClient telloClient;
+    private final int speed;
+
+    /**
+     * Creates a set speed command.
+     *
+     * @param telloClient  the tello client
+     * @param speed        the speed in cm/s, minimum 10, maximum 100
+     */
+    public SetSpeedCommand(final TelloClient telloClient, final int speed) {
+        Assert.speed(speed);
+        this.telloClient = telloClient;
+        this.speed = speed;
     }
 
     /**
-     * Sends a command to the initialized {@link DatagramSocket}.
+     * Executes the set speed {@link Command}.
      *
-     * @param message the message to send
-     * @return the response from the socket
-     * @throws IOException if the sending or receiving of the command fails
+     * @return 'ok' if everything is okay, 'error' otherwise
+     * @throws IOException if sending the command or receiving the return value fails
      */
-    public String sendCommand(final String message) throws IOException {
-        final byte[] buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-        datagramSocket.send(packet);
-        packet = new DatagramPacket(buffer, buffer.length);
-        datagramSocket.receive(packet);
-        return new String(packet.getData(), 0, packet.getLength());
+    public String execute() throws IOException {
+        return telloClient.sendCommand(COMMAND + SPACE + speed);
     }
-
 }

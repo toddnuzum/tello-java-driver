@@ -22,37 +22,44 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.client;
+package com.github.bdg91.tello.command.control;
+
+import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
+import com.github.bdg91.tello.util.Assert;
 
 import java.io.IOException;
-import java.net.*;
 
-public class TelloClient {
+/**
+ * Command to make the drone fly right by a specified distance.
+ */
+public class RightCommand implements Command {
 
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
+    private static final String COMMAND = "right";
+    private static final String SPACE = " ";
 
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
+    private final TelloClient telloClient;
+    private final int distanceInCm;
+
+    /**
+     * Creates a right command.
+     *
+     * @param telloClient  the tello client
+     * @param distanceInCm the distance in cm, minimum 20, maximum 500
+     */
+    public RightCommand(final TelloClient telloClient, final int distanceInCm) {
+        Assert.distance(distanceInCm);
+        this.telloClient = telloClient;
+        this.distanceInCm = distanceInCm;
     }
 
     /**
-     * Sends a command to the initialized {@link DatagramSocket}.
+     * Executes the right {@link Command}.
      *
-     * @param message the message to send
-     * @return the response from the socket
-     * @throws IOException if the sending or receiving of the command fails
+     * @return 'ok' if everything is okay, 'error' otherwise
+     * @throws IOException if sending the command or receiving the return value fails
      */
-    public String sendCommand(final String message) throws IOException {
-        final byte[] buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-        datagramSocket.send(packet);
-        packet = new DatagramPacket(buffer, buffer.length);
-        datagramSocket.receive(packet);
-        return new String(packet.getData(), 0, packet.getLength());
+    public String execute() throws IOException {
+        return telloClient.sendCommand(COMMAND + SPACE + distanceInCm);
     }
-
 }

@@ -22,37 +22,38 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.client;
+package com.github.bdg91.tello.command.read;
+
+import com.github.bdg91.tello.client.TelloClient;
+import com.github.bdg91.tello.command.Command;
 
 import java.io.IOException;
-import java.net.*;
 
-public class TelloClient {
+/**
+ * Command to get IMU acceleration data in 0.001g.
+ */
+public class ReadAccelerationCommand implements Command {
 
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
+    private static final String COMMAND = "acceleration?";
 
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
+    private final TelloClient telloClient;
+
+    /**
+     * Creates a read acceleration command.
+     *
+     * @param telloClient the tello client
+     */
+    public ReadAccelerationCommand(final TelloClient telloClient) {
+        this.telloClient = telloClient;
     }
 
     /**
-     * Sends a command to the initialized {@link DatagramSocket}.
+     * Executes the read acceleration {@link Command}.
      *
-     * @param message the message to send
-     * @return the response from the socket
-     * @throws IOException if the sending or receiving of the command fails
+     * @return the current IMU acceleration data in 0.001g
+     * @throws IOException if sending the command or receiving the return value fails
      */
-    public String sendCommand(final String message) throws IOException {
-        final byte[] buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-        datagramSocket.send(packet);
-        packet = new DatagramPacket(buffer, buffer.length);
-        datagramSocket.receive(packet);
-        return new String(packet.getData(), 0, packet.getLength());
+    public String execute() throws IOException {
+        return telloClient.sendCommand(COMMAND);
     }
-
 }

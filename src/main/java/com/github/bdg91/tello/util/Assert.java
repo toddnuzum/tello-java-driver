@@ -22,37 +22,45 @@
  * SOFTWARE.
  */
 
-package com.github.bdg91.tello.client;
+package com.github.bdg91.tello.util;
 
-import java.io.IOException;
-import java.net.*;
+public class Assert {
 
-public class TelloClient {
-
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
-
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
+    private Assert() {
+        // Hide constructor
     }
 
     /**
-     * Sends a command to the initialized {@link DatagramSocket}.
+     * Checks if the specified distance is valid.
      *
-     * @param message the message to send
-     * @return the response from the socket
-     * @throws IOException if the sending or receiving of the command fails
+     * @param distanceInCm the distance in cm
      */
-    public String sendCommand(final String message) throws IOException {
-        final byte[] buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, inetAddress, PORT);
-        datagramSocket.send(packet);
-        packet = new DatagramPacket(buffer, buffer.length);
-        datagramSocket.receive(packet);
-        return new String(packet.getData(), 0, packet.getLength());
+    public static void distance(final int distanceInCm) {
+        if (distanceInCm < 20 | distanceInCm > 500) {
+            throw new IllegalArgumentException("The minimum allowed distance is 20, the maximum allowed distance is 500.");
+        }
+    }
+
+    /**
+     * Checks if the specified amount of degrees is valid.
+     *
+     * @param degrees the amount of degrees
+     */
+    public static void degrees(final int degrees) {
+        if (degrees < 1 | degrees > 3600) {
+            throw new IllegalArgumentException("The minimum amount of degrees is 1, the maximum amount of degrees is 3600.");
+        }
+    }
+
+    /**
+     * Checks if the specified speed is valid.
+     *
+     * @param speed the speed in cm/s
+     */
+    public static void speed(final int speed) {
+        if (speed < 10 | speed > 100) {
+            throw new IllegalArgumentException("The minimum speed is 1, the maximum speed is 100.");
+        }
     }
 
 }
