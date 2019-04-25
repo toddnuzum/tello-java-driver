@@ -6,7 +6,7 @@
 
     <groupId>com.github.bdg91.tello</groupId>
     <artifactId>tello-java-driver</artifactId>
-    <version>0.0.1</version>
+    <version>v0.9.0-beta</version>
 
     <dependencies>
         <dependency>
@@ -54,6 +54,20 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>  <!-- Create sources.jar -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
