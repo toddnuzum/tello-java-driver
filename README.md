@@ -25,7 +25,7 @@ Pull requests should be made against the develop (default) branch and include re
 ---
 
 ## Build
-Java 11+ is required to build and compile the source. To build and test the driver:
+Java 12+ is required to build and compile the source. To build and test the driver:
 ```sh
 $ git clone https://github.com/bdg91/tello-java-driver.git
 $ cd tello-java-driver

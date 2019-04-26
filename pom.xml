@@ -6,7 +6,7 @@
 
     <groupId>com.github.bdg91.tello</groupId>
     <artifactId>tello-java-driver</artifactId>
-    <version>v0.9.0-beta</version>
+    <version>v0.10.0-beta</version>
 
     <dependencies>
         <dependency>
