@@ -11,8 +11,43 @@
 ---
 
 ## How to use
+To use it in your Maven build add:
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
 
-Examples will follow soon.
+and the dependency:
+```xml
+<dependency>
+    <groupId>com.github.bdg91</groupId>
+    <artifactId>tello-java-driver</artifactId>
+    <version>v0.10.2-beta</version>
+</dependency>
+```
+
+To use it in your Gradle build add:
+```groovy
+allprojects {
+    repositories {
+        ...
+	maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+and the dependency:
+```groovy
+dependencies {
+    implementation 'com.github.bdg91:tello-java-driver:v0.10.2-beta'
+}
+```
+
+Implementation examples will follow soon.
 
 ---
 
