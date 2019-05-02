@@ -43,7 +43,7 @@ allprojects {
 and the dependency:
 ```groovy
 dependencies {
-    implementation 'com.github.bdg91:tello-java-driver:v0.10.2-beta'
+    implementation 'com.github.bdg91:tello-java-driver:v1.0.0'
 }
 ```
 
