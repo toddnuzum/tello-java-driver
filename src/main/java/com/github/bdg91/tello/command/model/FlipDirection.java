@@ -32,7 +32,7 @@ public enum FlipDirection {
 
     private final String label;
 
-    FlipDirection(String label) {
+    FlipDirection(final String label) {
         this.label = label;
     }
 

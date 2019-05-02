@@ -53,7 +53,7 @@ public class GoCommand implements Command {
      * @param positionZ   the z position, minimum 20, maximum 500
      * @param speed       the speed, minimum 10, maximum 100
      */
-    public GoCommand(TelloClient telloClient, int positionX, int positionY, int positionZ, int speed) {
+    public GoCommand(final TelloClient telloClient, final int positionX, final int positionY, final int positionZ, final int speed) {
         Assert.distance(positionX);
         Assert.distance(positionY);
         Assert.distance(positionZ);
