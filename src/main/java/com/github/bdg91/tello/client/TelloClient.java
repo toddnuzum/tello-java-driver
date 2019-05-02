@@ -29,18 +29,38 @@ import java.net.*;
 
 public class TelloClient {
 
-    private final DatagramSocket datagramSocket;
-    private final InetAddress inetAddress;
-    private final int PORT;
+    private static TelloClient instance;
 
-    public TelloClient(final DatagramSocket datagramSocket, final InetAddress inetAddress, final int PORT) {
-        this.datagramSocket = datagramSocket;
-        this.inetAddress = inetAddress;
-        this.PORT = PORT;
+    private static final String IP_ADDRESS = "192.168.10.1";
+    private static final int PORT = 8889;
+
+    private DatagramSocket datagramSocket;
+    private InetAddress inetAddress;
+
+    private TelloClient() {
+        try {
+            datagramSocket = new DatagramSocket();
+            inetAddress = InetAddress.getByName(IP_ADDRESS);
+        } catch (SocketException | UnknownHostException exception) {
+            // TODO Handle error gracefully.
+            exception.printStackTrace();
+        }
     }
 
     /**
-     * Sends a command to the initialized {@link DatagramSocket}.
+     * Gets an instance of the TelloClient.
+     *
+     * @return a TelloClient
+     */
+    public TelloClient getInstance() {
+        if (instance == null) {
+            instance = new TelloClient();
+        }
+        return instance;
+    }
+
+    /**
+     * Sends a command to the socket.
      *
      * @param message the message to send
      * @return the response from the socket
