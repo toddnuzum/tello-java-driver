@@ -1,6 +1,7 @@
 # Tello Java Driver
 > Java driver for the DJI Ryze Tello drone.
 
+[![Build Status](https://travis-ci.org/bdg91/tello-java-driver.svg?branch=develop)](https://travis-ci.org/bdg91/tello-java-driver)
 [![codecov](https://codecov.io/gh/bdg91/tello-java-driver/branch/develop/graph/badge.svg)](https://codecov.io/gh/bdg91/tello-java-driver)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9b6da0ce51cf495a962415570ecab2fb)](https://www.codacy.com/app/bdg91/tello-java-driver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=bdg91/tello-java-driver&amp;utm_campaign=Badge_Grade)
 [![](https://jitpack.io/v/bdg91/tello-java-driver.svg)](https://jitpack.io/#bdg91/tello-java-driver)
