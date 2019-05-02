@@ -26,7 +26,7 @@ and the dependency:
 <dependency>
     <groupId>com.github.bdg91</groupId>
     <artifactId>tello-java-driver</artifactId>
-    <version>v0.10.2-beta</version>
+    <version>v1.0.0</version>
 </dependency>
 ```
 
