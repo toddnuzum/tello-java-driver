@@ -11,7 +11,8 @@
 ---
 
 ## How to use
-To use it in your Maven build add:
+
+#### Maven
 ```xml
 <repositories>
     <repository>
@@ -21,16 +22,15 @@ To use it in your Maven build add:
 </repositories>
 ```
 
-and the dependency:
 ```xml
 <dependency>
     <groupId>com.github.bdg91</groupId>
     <artifactId>tello-java-driver</artifactId>
-    <version>v1.0.0</version>
+    <version>v1.0.1</version>
 </dependency>
 ```
 
-To use it in your Gradle build add:
+#### Gradle
 ```groovy
 allprojects {
     repositories {
@@ -40,14 +40,37 @@ allprojects {
 }
 ```
 
-and the dependency:
 ```groovy
 dependencies {
-    implementation 'com.github.bdg91:tello-java-driver:v1.0.0'
+    implementation 'com.github.bdg91:tello-java-driver:v1.0.1'
 }
 ```
 
-Implementation examples will follow soon.
+#### Implementation example
+
+```java
+TelloClient client = TelloClient.getInstance();
+
+TakeOffCommand takeOffCommand = new TakeOffCommand(client);
+CwCommand cwCommand = new CwCommand(client, 360);
+LandCommand landCommand = new LandCommand(client);
+
+try {
+    // Take off
+    takeOffCommand.execute();
+    Thread.sleep(5000);
+
+    // Full clockwise pirouette
+    cwCommand.execute();
+    Thread.sleep(5000);
+
+    // Land
+    landCommand.execute();
+    Thread.sleep(5000);
+} catch (Exception exception) {
+    // Exception handling
+}
+```
 
 ---
 
