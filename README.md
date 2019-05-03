@@ -51,9 +51,9 @@ dependencies {
 ```java
 TelloClient client = TelloClient.getInstance();
 
-TakeOffCommand takeOffCommand = new TakeOffCommand(client);
-CwCommand cwCommand = new CwCommand(client, 360);
-LandCommand landCommand = new LandCommand(client);
+Command takeOffCommand = new TakeOffCommand(client);
+Command cwCommand = new CwCommand(client, 360);
+Command landCommand = new LandCommand(client);
 
 try {
     // Take off
