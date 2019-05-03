@@ -52,7 +52,7 @@ public class TelloClient {
      *
      * @return a TelloClient
      */
-    public TelloClient getInstance() {
+    public static TelloClient getInstance() {
         if (instance == null) {
             instance = new TelloClient();
         }
