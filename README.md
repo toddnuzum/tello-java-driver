@@ -66,7 +66,6 @@ try {
 
     // Land
     landCommand.execute();
-    Thread.sleep(5000);
 } catch (Exception exception) {
     // Exception handling
 }
