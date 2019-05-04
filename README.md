@@ -56,24 +56,16 @@ Command takeOffCommand = new TakeOffCommand(client);
 Command cwCommand = new CwCommand(client, 360);
 Command landCommand = new LandCommand(client);
 
-try {
-    // Enter the SDK mode
-    commandCommand.execute();
-    Thread.sleep(5000);
-    
-    // Take off
-    takeOffCommand.execute();
-    Thread.sleep(5000);
+List<Command> flightPlan = Arrays.asList(commandCommand, takeOffCommand, cwCommand, landCommand);
 
-    // Full clockwise pirouette
-    cwCommand.execute();
-    Thread.sleep(5000);
-
-    // Land
-    landCommand.execute();
-} catch (Exception exception) {
-    // Exception handling
-}
+flightPlan.forEach(command -> {
+    try {
+        command.execute();
+        Thread.sleep(5000);
+    } catch (Exception exception) {
+        // Exception handling
+    }
+});
 ```
 
 ---
