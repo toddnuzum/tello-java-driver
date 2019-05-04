@@ -51,11 +51,16 @@ dependencies {
 ```java
 TelloClient client = TelloClient.getInstance();
 
+Command commandCommand = new CommandCommand(client);
 Command takeOffCommand = new TakeOffCommand(client);
 Command cwCommand = new CwCommand(client, 360);
 Command landCommand = new LandCommand(client);
 
 try {
+    // Enter the SDK mode
+    commandCommand.execute();
+    Thread.sleep(5000);
+    
     // Take off
     takeOffCommand.execute();
     Thread.sleep(5000);
