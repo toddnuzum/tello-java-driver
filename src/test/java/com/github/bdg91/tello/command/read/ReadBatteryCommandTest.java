@@ -50,8 +50,8 @@ public class ReadBatteryCommandTest {
     @Before
     public void setUp() {
         command = new ReadBatteryCommand(telloClient);
+        
     }
-
     @Test(expected = IOException.class)
     public void testExecute_io_exception() throws Exception {
         when(telloClient.sendCommand(COMMAND)).thenThrow(IOException.class);

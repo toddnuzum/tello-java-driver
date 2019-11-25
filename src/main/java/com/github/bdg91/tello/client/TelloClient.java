@@ -44,6 +44,7 @@ public class TelloClient {
         } catch (SocketException | UnknownHostException exception) {
             // TODO Handle error gracefully.
             exception.printStackTrace();
+            System.out.println("TN: error occurred in TelloClient");
         }
     }
 
